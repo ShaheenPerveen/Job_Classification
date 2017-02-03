@@ -3,65 +3,34 @@ script 3rd:
 
 
 import pandas as pd
-
 import numpy as np
-
-train = pd.read_csv("finaltrain.csv", sep=",", encoding="latin1")
-
-
-
-test = pd.read_csv("finaltest.csv", sep=",", header=0, encoding="latin1")
-
-
-
 import re
-
 from nltk.corpus import stopwords
-
 from bs4 import BeautifulSoup
 
-
+train = pd.read_csv("finaltrain.csv", sep=",", encoding="latin1")
+test = pd.read_csv("finaltest.csv", sep=",", header=0, encoding="latin1")
 
 def text_to_words( raw_text ):
 
     # Function to convert a raw text to a string of words
-
-    
-
     # 1. Remove HTML
-
     review_text = BeautifulSoup(raw_text).get_text() 
-
-    #
-
+    
     # 2. Remove non-letters        
-
     letters_only = re.sub("[^a-zA-Z]", " ", review_text) 
-
-    #
-
-    # 3. Convert to lower case, split into individual words
-
+    
+    #3. Convert to lower case, split into individual words
     words = letters_only.lower().split()                             
-
-    #
-
+    
     # 4. convert the stop words to a set
-
     stops = set(stopwords.words("english"))                  
-
-    # 
-
+    
     # 5. Remove stop words
-
     meaningful_words = [w for w in words if not w in stops]   
-
-    #
-
+    
     # 6. Join the words back into one string separated by space, 
-
     # and return the result.
-
     return( " ".join( meaningful_words ))
 
 
