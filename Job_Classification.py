@@ -1,6 +1,3 @@
-script 3rd:
-
-
 
 import pandas as pd
 import numpy as np
@@ -38,9 +35,6 @@ def text_to_words( raw_text ):
 # Initialize an empty list to hold the clean Title
 
 clean_train_Title = []
-
-
-
 num_Title = train["Title"].size
 
 
@@ -49,12 +43,10 @@ num_Title = train["Title"].size
 
 for i in range( 0, num_Title ):
 
-    # Call our function for each one, and add the result to the list
-
+   # Call our function for each one, and add the result to the list
     if( (i+1)%10 == 0 ):
 
         print ("Review %d of %d\n" % ( i+1, num_Title ))
-
     clean_train_Title.append( text_to_words( train["Title"].iloc[i] ) )
 
 
@@ -62,9 +54,6 @@ for i in range( 0, num_Title ):
 # Initialize an empty list to hold the clean Full Description
 
 clean_train_FullDescription = []
-
-
-
 num_FullDescription = train["FullDescription"].size
 
 
@@ -90,40 +79,13 @@ for i in range( 0, num_FullDescription ):
 ## combine clean title and full description
 
 ## both are combined so that they can be converted to Bag of Words
-
-
-
 clean_train_Title_Full = [a + " " + b for a, b in zip(clean_train_Title, clean_train_FullDescription)]
 
-
-
-## to release memory delete unnecessary items
-
-## do only if required
-
-del clean_train_Title
-
-del clean_train_FullDescription
-
-
-
-
-
 ############# 	TEST DATA PREPROCESSING 
-
-
-
-
-
 # Initialize an empty list to hold the clean title
 
 clean_test_Title = []
-
-
-
 num_Title = test["Title"].size
-
-
 
 # Loop over each Title
 
@@ -142,12 +104,7 @@ for i in range( 0, num_Title ):
 # Initialize an empty list to hold the clean Full Description
 
 clean_test_FullDescription = []
-
-
-
 num_Full = test["FullDescription"].size
-
-
 
 # Loop over each review; create an index i that goes from 0 to the length
 
@@ -164,46 +121,20 @@ for i in range( 0, num_Full ):
     clean_test_FullDescription.append( text_to_words( test["FullDescription"].iloc[i] ) )
 
 
-
-
-
-
-
 ## combine clean title and full description
 
 ## both are combined so that they can be converted to Bag of Words
-
-
-
 clean_test_Title_Full = [a + " " + b for a, b in zip(clean_test_Title, clean_test_FullDescription)]
 
 
-
-
-
-## delete unnecessary objects if you need memory
-
-del clean_test_Title
-
-del clean_test_FullDescription
-
-
-
 ## vectorizing
-
-
-
 from sklearn.feature_extraction.text import CountVectorizer
-
-
 
 # Initialize the "CountVectorizer" object
 
 # bag of words tool.  
 
 vectorizer = CountVectorizer(analyzer = "word",tokenizer = None, preprocessor = None, stop_words = None, max_features = 6000) 
-
-
 
 # fit_transform() does two functions: First, it fits the model
 
@@ -212,36 +143,19 @@ vectorizer = CountVectorizer(analyzer = "word",tokenizer = None, preprocessor = 
 # into feature vectors. The input to fit_transform should be a list of 
 
 # strings.
-
-
-
 clean_train_Title_Full = vectorizer.fit_transform(clean_train_Title_Full)
-
-
 
 # Numpy arrays are easy to work with, so convert the result to an 
 
 # array
-
 clean_train_Title_Full = clean_train_Title_Full.toarray()
 
-
-
-
-
 ## test data
-
-
-
 # Initialize the "CountVectorizer" object, which is scikit-learn's
 
 # bag of words tool.  
 
 vectorizer = CountVectorizer(analyzer = "word",Tokenizer = None, preprocessor = None, stop_words = None, max_features = 5000) 
-
-
-
-
 
 # fit_transform() does two functions: First, it fits the model
 
@@ -253,10 +167,6 @@ vectorizer = CountVectorizer(analyzer = "word",Tokenizer = None, preprocessor = 
 
 test_data_features = vectorizer.fit_transform(clean_test_Title_Full)
 
-
-
-
-
 # Numpy arrays are easy to work with, so convert the result to an 
 
 # array
@@ -264,8 +174,6 @@ test_data_features = vectorizer.fit_transform(clean_test_Title_Full)
 test_data_features = test_data_features.toarray()
 
 test_data_features.shape
-
-
 
 ## creating class weight dictionary
 
@@ -281,17 +189,11 @@ for key, value in weights.items():
 
 newdict
 
-
-
 from sklearn.ensemble import RandomForestClassifier
-
-
 
 # Initialize a Random Forest classifier with 50 trees
 
 forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weight ='balanced', verbose=2) 
-
-
 
 # Fit the forest to the training set, using the bag of words as 
 
@@ -302,8 +204,6 @@ forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weig
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
 
 result = forest.predict(test_data_features)
 
@@ -325,32 +225,17 @@ df_confusion
 
 forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weight =newdict, verbose=2)
 
-
-
 # Fit the forest to the training set, using the bag of words as 
 
 # features and the sentiment labels as the response variable
 
 #
-
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
-
 result = forest.predict(test_data_features)
 
-
-
-
-
-
-
 from sklearn.feature_extraction.text import TfidfVectorizer
-
-
-
 ## Using TF_IDF to vectorize
 
 tf = TfidfVectorizer(analyzer='word', min_df = 0, stop_words = None, max_features = 6000)
