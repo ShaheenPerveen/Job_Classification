@@ -240,8 +240,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 tf = TfidfVectorizer(analyzer='word', min_df = 0, stop_words = None, max_features = 6000)
 
-
-
 # fit_transform() does two functions: First, it fits the model
 
 # and learns the vocabulary; second, it transforms our training data
@@ -252,27 +250,15 @@ tf = TfidfVectorizer(analyzer='word', min_df = 0, stop_words = None, max_feature
 
 train_data_features = tf.fit_transform(clean_train_Title_Full)
 
-
-
 # Numpy arrays are easy to work with, so convert the result to an 
 
 # array
-
 train_data_features = train_data_features.toarray()
-
 train_data_features.shape
-
-
-
-
-
-
 
 # Initialize a Random Forest classifier with 50 trees
 
 forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weight ='balanced', verbose=2) 
-
-
 
 # Fit the forest to the training set, using the bag of words as 
 
@@ -283,9 +269,6 @@ forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weig
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
-
 result = forest.predict(test_data_features)
 
 
@@ -302,10 +285,7 @@ df_confusion
 
 
 
-
-
 # Initialize a Random Forest classifier with 50 trees
-
 forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weight =newdict, verbose=2)
 
 
@@ -319,9 +299,6 @@ forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weig
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
-
 result = forest.predict(test_data_features)
 
 
@@ -348,17 +325,11 @@ df_confusion
 
 ## attempts with tf-idf vectorizer
 
-
-
 from sklearn.feature_extraction.text import TfidfVectorizer
-
-
 
 ## Using TF_IDF to vectorizer
 
 tf = TfidfVectorizer(analyzer='word', min_df = 0, stop_words = None, max_features = 6000)
-
-
 
 # fit_transform() does two functions: First, it fits the model
 
@@ -370,8 +341,6 @@ tf = TfidfVectorizer(analyzer='word', min_df = 0, stop_words = None, max_feature
 
 train_data_features = tf.fit_transform(clean_train_Title_Full)
 
-
-
 # Numpy arrays are easy to work with, so convert the result to an 
 
 # array
@@ -381,11 +350,9 @@ train_data_features = train_data_features.toarray()
 train_data_features.shape
 
 
-
 ## Using TF_IDF to vectorizer for test data
 
 tf = TfidfVectorizer(analyzer='word', min_df = 0, stop_words = None, max_features = 6000)
-
 
 
 # fit_transform() does two functions: First, it fits the model
