@@ -427,49 +427,27 @@ df_confusion = pd.crosstab(y_actu, y_pred)
 df_confusion
 
 
-
-
-
 #### ATTEMPTS WITH NAIVE BAYES
-
-
-
 #Create a Naive Bayes Gaussian Classifier 
-
-
-
 from sklearn.naive_bayes import GaussianNB
-
-
 
 gnb = GaussianNB() 
 
 # Train the model using the training sets 
 
 gnb = gnb.fit(train_data_features, train["Category1"]) 
-
-
-
 result = gnb.predict(test_data_features)
 
 
 
 #Create a Naive Bayes Multinomial Classifier 
-
-
-
 from sklearn.naive_bayes import MultinomialNB
-
-
 
 mnb = MultinomialNB(alpha=0.5) 
 
 # Train the model using the training sets 
 
 mnb = mnb.fit(train_data_features, train["Category1"]) 
-
-
-
 result = mnb.predict(test_data_features)
 
 
@@ -477,7 +455,7 @@ result = mnb.predict(test_data_features)
 
 
 
-
+###################################################################################################################################################################
 ############## BIGRAM VECTORIZER
 
 
