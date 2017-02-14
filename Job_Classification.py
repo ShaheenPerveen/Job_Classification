@@ -461,9 +461,6 @@ result = mnb.predict(test_data_features)
 
 
 bigram_vectorizer = CountVectorizer(ngram_range=(1, 2), token_pattern=r'\b\w+\b', min_df=1, max_features = 4000)
-
-
-
 analyze = bigram_vectorizer.build_analyzer()
 
 
@@ -471,80 +468,44 @@ analyze = bigram_vectorizer.build_analyzer()
 ## converting train and test data to bigram model
 
 train_data_features = bigram_vectorizer.fit_transform(clean_train_Title_Full).toarray()
-
 train_data_features.shape
 
 
 
 test_data_features = bigram_vectorizer.fit_transform(clean_test_Title_Full).toarray()
-
 test_data_features.shape
 
 
 
 ## using Gaussian Naive bayes
-
-
-
 gnb = GaussianNB() 
 
 # Train the model using the training sets 
 
 gnb = gnb.fit(train_data_features, train["Category1"]) 
-
-
-
 result = gnb.predict(test_data_features)
 
-
-
 #Create a Naive Bayes Multinomial Classifier 
-
-
-
 ## using multinomial naive bayes
-
-
-
 mnb = MultinomialNB(alpha=0.5) 
 
 # Train the model using the training sets 
 
 mnb = mnb.fit(train_data_features, train["Category1"]) 
-
-
-
 result = mnb.predict(test_data_features)
 
 
-
-
-
 ## applying Random forest on bigram
-
-
-
 # Initialize a Random Forest classifier with 100 trees
 
 forest = RandomForestClassifier(n_estimators = 70, max_features=2000, class_weight =newdict, verbose=2)
 
-
-
 # Fit the forest to the training set, using the bag of words as 
-
 # features and the sentiment labels as the response variable
-
-#
-
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
-
 result = forest.predict(test_data_features)
-
-
 
 ## constructing confusion matrix to check performance
 
