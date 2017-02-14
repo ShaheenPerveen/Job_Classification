@@ -378,30 +378,17 @@ test_data_features.shape
 
 
 ## attempts with Random Forest
-
-
-
 # Initialize a Random Forest classifier with 50 trees
 
 forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weight ='balanced', verbose=2) 
 
-
-
 # Fit the forest to the training set, using the bag of words as 
 
 # features and the sentiment labels as the response variable
-
-#
-
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
-
 result = forest.predict(test_data_features)
-
-
 
 ## constructing confusion matrix to check performance
 
@@ -414,29 +401,17 @@ df_confusion = pd.crosstab(y_actu, y_pred)
 df_confusion
 
 
-
-
-
-
-
 # Initialize a Random Forest classifier with 50 trees
 
 forest = RandomForestClassifier(n_estimators = 50, max_features=2000, class_weight =newdict, verbose=2)
 
 
-
 # Fit the forest to the training set, using the bag of words as 
-
 # features and the sentiment labels as the response variable
-
-#
 
 # This may take a few minutes to run
 
 forest = forest.fit( train_data_features, train["Category1"] )
-
-
-
 result = forest.predict(test_data_features)
 
 
