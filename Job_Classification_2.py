@@ -48,15 +48,10 @@ trainDesc = JobData.iloc[:,2].values
 
 ## converting the categorical label to number
 from sklearn import preprocessing 
-
 le = preprocessing.LabelEncoder()
-
 le.fit(labels)
-
 labels_number = le.transform(labels)
-
 labels_number[1]
-
 
 # In[15]:
 
