@@ -53,17 +53,6 @@ le.fit(labels)
 labels_number = le.transform(labels)
 labels_number[1]
 
-# In[15]:
-
-print(JobData.iloc[:2,:])
-
-print(labels[1])
-
-print(trainTitle[1])
-
-print(trainDesc[1])
-
-
 # In[17]:
 
 
@@ -119,9 +108,6 @@ for i in range( 0, num_FullDescription ):
 # Initialize an empty list to hold the clean Title
 
 clean_train_Title = []
-
-
-
 num_Title = trainTitle.size
 
 
@@ -143,9 +129,6 @@ for i in range( 0, num_Title ):
 # Initialize an empty list to hold the clean Full Description
 
 clean_train_FullDescription = []
-
-
-
 num_FullDescription = trainDesc.size
 
 
@@ -163,9 +146,6 @@ for i in range( 0, num_FullDescription ):
         print ("Review %d of %d\n" % ( i+1, num_FullDescription ))
 
     clean_train_FullDescription.append( text_to_words( trainDesc[i] ) )
-
-
-
 
 
 ## combine clean title and full description
