@@ -37,7 +37,7 @@ from sklearn.cross_validation import train_test_split
 
 # In[11]:
 
-JobData = pd.read_csv("/home/aiml_test_user/Shaheen/EdgeNetworksData.csv", encoding="latin1")
+JobData = pd.read_csv("/home/aiml_test_user/Shaheen/JobData.csv", encoding="latin1")
 
 JobData = JobData.dropna()
 
